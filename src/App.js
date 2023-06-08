@@ -58,7 +58,6 @@ function App() {
           <div>Hash: {blockInfos.hash}</div>
           <div>Parent Hash: {blockInfos.parentHash}</div>
           <div>Nonce: {blockInfos.nonce}</div>
-          <div>Transactions Hash: {blockInfos.transactions}</div>
          
         </div>
         )}
@@ -66,23 +65,27 @@ function App() {
         <div>
         Transactions:
         <ul>
-          {transactions.map((txHash,index) => (
+          {transactions.map((transaction,index) => (
             <li key={index}>
-              <button onClick={() => getTransactionDetails(txHash)}>Details</button>
-              {txHash}
+              <button onClick={() => getTransactionDetails(transaction.hash)}>Details</button>
+              {transaction.hash}
+              {transactionDetails && transactionDetails.transactionHash === transaction.hash && (
+              <div>
+                <div>From: {transactionDetails.from}</div>
+                <div>To: {transactionDetails.to}</div>
+                <div>Gas Used: {transactionDetails.gasUsed.toString()}</div>
+                <div>Status: {transactionDetails.status ? "Success" : "Failed"}</div>
+              </div>
+    )}
             </li>
           ))}
         </ul>
       </div>
       {transactionDetails && (
-  <ul>
-    {Object.entries(transactionDetails).map(([key, value]) => (
-      <li key={key}>
-        <strong>{key}: </strong>{value}
-      </li>
-    ))}
-  </ul>
-)}
+        <div>
+          
+        </div>
+      )}
 
 
 
